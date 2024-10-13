@@ -36,12 +36,25 @@ gem 'shoulda-matchers'
 gem 'dotenv', '2.8.1', require: 'dotenv/load'
 gem 'rack-cors'
 
+gem 'ed25519', '>= 1.2', '< 2.0'
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'base64', '>= 0.1.1', '< 0.2.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
+
+  # Capistrano
+  gem 'capistrano-bundler', '2.1.1'
+  gem 'capistrano-ext', '1.2.1'
+  gem 'capistrano-linked-files', '1.2.0'
+  gem 'capistrano-passenger', '0.2.1'
+  gem 'capistrano-rails', '1.6.3'
+  gem 'capistrano-rails-console', '2.3.0'
+  gem 'capistrano-rvm', '0.1.2'
 end
 
 group :development do

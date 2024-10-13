@@ -2,7 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  Dotenv.load('.env', '.prod.env')
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
@@ -42,6 +42,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # Comment until cert
   config.force_ssl = true
 
   # Log to STDOUT by default
@@ -55,7 +56,7 @@ Rails.application.configure do
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "error")
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
