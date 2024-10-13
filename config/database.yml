@@ -9,7 +9,6 @@ default: &default
 
 production:
   <<: *default
-  sslmode: require
 
 staging:
   <<: *default
