@@ -33,6 +33,7 @@ gem 'shoulda-matchers'
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
+gem 'dotenv', '2.8.1', require: 'dotenv/load'
 gem 'rack-cors'
 
 group :development, :test do
@@ -49,7 +50,7 @@ group :development do
 end
 
 gem 'rubocop'
-
+gem 'byebug'
 gem 'devise'
 gem 'devise-jwt'
 gem 'jsonapi-serializer'

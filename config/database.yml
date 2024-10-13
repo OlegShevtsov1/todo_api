@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  host: <%= ENV['TODOS_POSTGRES_HOST'] %>
+  port: <%= ENV['TODOS_POSTGRES_PORT'] %>
+  username: <%= ENV['TODOS_POSTGRES_USERNAME'] %>
+  password: <%= ENV['TODOS_POSTGRES_PASSWORD'] %>
+  database: <%= ENV['TODOS_POSTGRES_SCHEMA'] %>
+  pool: <%= ENV['TODOS_POSTGRES_POOL'] || 10 %>
+
+production:
+  <<: *default
+  sslmode: require
+
+staging:
+  <<: *default
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  username: <%= ENV['TODOS_POSTGRES_USERNAME'] %>
+  password: <%= ENV['TODOS_POSTGRES_PASSWORD'] %>
+  database: <%= ENV['TODOS_POSTGRES_SCHEMA'] %>_test<%= ENV['TEST_ENV_NUMBER'] %>
