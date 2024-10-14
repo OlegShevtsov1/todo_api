@@ -36,9 +36,9 @@ gem 'shoulda-matchers'
 gem 'dotenv', '2.8.1', require: 'dotenv/load'
 gem 'rack-cors'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
-gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'base64', '>= 0.1.1', '< 0.2.0'
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'ed25519', '>= 1.2', '< 2.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -62,11 +62,11 @@ group :development do
   # gem "spring"
 end
 
-gem 'rubocop'
 gem 'byebug'
 gem 'devise'
 gem 'devise-jwt'
 gem 'jsonapi-serializer'
+gem 'rubocop'
 
 gem 'goldiloader'
 gem 'rswag'
