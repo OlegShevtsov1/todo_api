@@ -1,57 +1,43 @@
 require 'swagger_helper'
+require 'schemas/doctor'
 
 RSpec.describe 'doctors', type: :request do
+  let(:user) { create :user, :example }
+  let(:Authorization) { "Bearer #{jwt_token(user)}" }
+
   path '/doctors' do
-    get('List doctors') do
+    get 'List doctors' do
       tags 'Doctors'
-      response(200, 'successful') do
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
+      produces 'application/json'
+      response 200, 'successful' do
+        schema_data(Schemas::Doctor::FETCH_RESPONSE_SCHEMA)
+
+        let!(:doctor) { create :doctor, :example }
+        let(:payload) do
+          [{ 'attributes' => {
+               'id' => doctor.id,
+               'name' => doctor.name
+             },
+             'id' => doctor.id.to_s,
+             'type' => 'doctor' }]
         end
-        run_test!
+
+        run_test_with_example! do
+          expect(json_response['data']).to eq(payload)
+        end
       end
     end
 
     post('Create a doctor') do
       tags 'Doctors'
-      response(200, 'successful') do
+      response 200, 'successful' do
+        let(:params) { { doctor: { name: :name } } }
         consumes 'application/json'
-        parameter name: :doctor, in: :body, schema: {
-          type: :object,
-          properties: {
-            name: { type: :string },
-            age: { type: :integer },
-            city_id: { type: :integer },
-            user_id: { type: :integer },
-            description: { type: :string },
-            image_url: { type: :string },
-            detail_attributes: {
-              type: :object,
-              properties: {
-                price: { type: :integer },
-                specialization: { type: :string },
-                studies: { type: :string }
-              }
-            }
-          },
-          required: %w[
-            name age city_id user_id description image_url
-            detail_attributes price specialization studies
-          ]
-        }
+        parameter name: :params, in: :body, schema: Schemas::Doctor::CREATE_REQUEST_SCHEMA
 
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
-          }
+        run_test_with_example! do
+          expect(json_response['data']).to eq(payload)
         end
-        run_test!
       end
     end
   end

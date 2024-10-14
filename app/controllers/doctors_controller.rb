@@ -5,8 +5,8 @@ class DoctorsController < ApplicationController
   def create
     @doctor = Doctor.new(doctor_params)
 
-    if @doctor.save
-      @doctor.image_url = rails_blob_url(@doctor.avatar, only_path: true)
+    if @doctor.valid?
+      # @doctor.image_url = rails_blob_url(@doctor.avatar, only_path: true)
       @doctor.save
       render json: DoctorSerializer.new(@doctor).serializable_hash[:data][:attributes], status: :created
     else
@@ -18,7 +18,7 @@ class DoctorsController < ApplicationController
 
   def index
     @doctors = Doctor.all
-    render json: @doctors
+    render json: DoctorSerializer.new(@doctors).serializable_hash, status: :ok
   end
 
   def show

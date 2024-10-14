@@ -5,9 +5,11 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
+    token = request.env['warden-jwt_auth.token'] # Extract the JWT token
+
     render json: {
       status: 200,
-      data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
+      data: UserSerializer.new(resource).serializable_hash[:data][:attributes].merge(token:) # Merge token
     }
   end
 

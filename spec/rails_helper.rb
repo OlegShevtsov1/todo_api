@@ -9,6 +9,7 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'support/chrome'
 require 'devise'
+require 'support/helpers/api/v1/authenticate_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -57,6 +58,7 @@ RSpec.configure do |config|
   #       # ...
   #     end
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Helpers::Api::V1::AuthenticateHelper, type: :request
   # The different available types are documented in the features, such as in
   # https://rspec.info/features/6-0/rspec-rails
   config.infer_spec_type_from_file_location!
