@@ -34,6 +34,7 @@ RSpec.configure do |config|
       ],
       servers: [
         {
+          # TODO: should be aligned for local
           url: ENV.fetch('TODOS_HOST', 'http://localhost:4000')
         }
       ]
