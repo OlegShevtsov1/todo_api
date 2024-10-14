@@ -34,7 +34,7 @@ RSpec.configure do |config|
       ],
       servers: [
         {
-          url: 'http://localhost:4000'
+          url: ENV.fetch('TODOS_HOST', 'http://localhost:4000')
         }
       ]
     }
